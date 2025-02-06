@@ -5,12 +5,15 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>jaipeurdeneplusjamaisressentir</title>
     <style>
-      body {
+      /* Reset margin, padding, and overflow to ensure no extra space */
+      html, body {
         margin: 0;
-        overflow: hidden;
         padding: 0;
+        height: 100%;
+        overflow: hidden;
       }
 
+      /* Ensure canvas takes the entire window */
       #unity-canvas {
         display: block;
         width: 100%;
@@ -33,11 +36,12 @@
         document.getElementsByTagName('head')[0].appendChild(meta);
 
         var canvas = document.querySelector("#unity-canvas");
-        canvas.style.position = "fixed";
+        canvas.style.position = "absolute";
         canvas.style.top = "0";
         canvas.style.left = "0";
       }
 
+      // Create Unity instance and load WebGL build
       createUnityInstance(document.querySelector("#unity-canvas"), {
         arguments: [],
         dataUrl: "Build/firstbuild.data.unityweb",
@@ -47,9 +51,8 @@
         companyName: "DefaultCompany",
         productName: "New Unity Project",
         productVersion: "1.0",
-        // Uncomment the following line to make Unity match the WebGL canvas size to the DOM size
-        matchWebGLToCanvasSize: true,  // This is crucial for resizing
-        devicePixelRatio: 1,           // Optional: For managing high DPI displays
+        matchWebGLToCanvasSize: true,  // Crucial for resizing the game to the canvas size
+        devicePixelRatio: window.devicePixelRatio || 1,  // Handle different pixel ratios, especially on high-DPI displays
       });
     </script>
   </body>
